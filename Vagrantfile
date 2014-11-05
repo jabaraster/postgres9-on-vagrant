@@ -21,11 +21,16 @@
 #
 # 全てのDB/ユーザでパスワード認証を経ての接続を可能にする
 # sudo vi /var/lib/pgsql/9.3/data/pg_hba.conf
+#
 # # TYPE  DATABASE        USER            ADDRESS                 METHOD
+# 
 # # "local" is for Unix domain socket connections only
 # local   all             all                                     peer
+# 
 # # IPv4 local connections:
+# host    all             postgres        127.0.0.1/32            ident
 # host    all             all             0.0.0.0/0               password
+# 
 # # IPv6 local connections:
 # host    all             all             ::/0                    password
 #
@@ -43,5 +48,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
   config.vm.network "private_network", ip: "192.168.50.13"
 
-  #config.vm.provision :shell, :path => "provisioning.sh"
+  config.vm.provision :shell, :path => "provisioning.sh"
 end
